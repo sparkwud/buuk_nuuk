@@ -1,16 +1,4 @@
 # buuk_nuuk
 
-A new Flutter project.
+BuukNuuk is a Flutter application that leverages the Google Books API to help users search for and discover books. Whether you're looking for a specific title, author, or just browsing for new reads, BuukNuuk makes it easy and convenient to find and explore books from the vast Google Books database.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
