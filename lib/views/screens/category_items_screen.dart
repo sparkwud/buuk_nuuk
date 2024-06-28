@@ -111,13 +111,16 @@ class _CategoryItemScreenState extends ConsumerState<CategoryItemScreen> {
                                     child: SizedBox(
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(12),
-                                        child: Image(
-                                          height: constraints.maxHeight / 2,
-                                          width: constraints.maxWidth / 2,
-                                          image: NetworkImage(
-                                            "${book.imageLinks!.thumbnail}",
+                                        child: Hero(
+                                          tag: book,
+                                          child: Image(
+                                            height: constraints.maxHeight / 2,
+                                            width: constraints.maxWidth / 2,
+                                            image: NetworkImage(
+                                              "${book.imageLinks!.thumbnail}",
+                                            ),
+                                            fit: BoxFit.fill, // use this
                                           ),
-                                          fit: BoxFit.fill, // use this
                                         ),
                                       ),
                                     ),
