@@ -2,6 +2,7 @@ import 'package:buuk_nuuk/models/category_model.dart';
 import 'package:buuk_nuuk/providers/book_service_providers.dart';
 import 'package:buuk_nuuk/utils/app_drawables.dart';
 import 'package:buuk_nuuk/utils/widget_extensions.dart';
+import 'package:buuk_nuuk/views/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -36,7 +37,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'BookNook',
+          'BuukNuuk',
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -52,7 +53,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         actions: [
           IconButton(
             icon: AppIcons.icSearch.svgPicture(),
-            onPressed: () {},
+            onPressed: () => showSearch(
+              context: context,
+              delegate: SearchScreen(),
+            ),
           ),
         ],
       ),
@@ -67,43 +71,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
+                  padding: const EdgeInsets.all(16.0),
                   width: double.infinity,
                   height: 180,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: const DecorationImage(
-                      image:
-                          NetworkImage('https://via.placeholder.com/300x180'),
+                      image: NetworkImage(
+                        'https://images.unsplash.com/photo-1502485019198-a625bd53ceb7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fHw%3D',
+                      ),
                       fit: BoxFit.cover,
                     ),
                   ),
-                  child: Container(
-                    padding: const EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.black.withOpacity(0.4),
-                    ),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'We found the best',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'We found the best',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                      Text(
+                        'Books For You',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
                         ),
-                        Text(
-                          'Books For You',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Over 10,000 books on our service',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        'Over 10,000 books on our service',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ],
                   ),
                 ),
                 const Gap(20),
