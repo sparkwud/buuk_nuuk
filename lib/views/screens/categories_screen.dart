@@ -1,4 +1,5 @@
 import 'package:buuk_nuuk/models/category_model.dart';
+import 'package:buuk_nuuk/utils/pallete.dart';
 import 'package:buuk_nuuk/utils/text_theme.dart';
 import 'package:buuk_nuuk/views/screens/category_items_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,22 +14,21 @@ class CategoriesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        backgroundColor: Colors.white,
         title: Text(
           "Categories",
-          style: textTheme.displayMedium,
+          style: textTheme.displayMedium!.copyWith(color: colorScheme.primary),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: GridView.builder(
           // physics: const BouncingScrollPhysics(),
           itemCount: Category.values.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 16 / 15,
+            childAspectRatio: 1,
             crossAxisCount: 2,
             crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
+            mainAxisSpacing: 16,
           ),
           itemBuilder: (context, index) {
             return CategoryCard(

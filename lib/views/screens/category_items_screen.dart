@@ -38,11 +38,9 @@ class _CategoryItemScreenState extends ConsumerState<CategoryItemScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: appColors.black),
         title: Text(
           widget.category.name.toTitleCase(),
-          style: textTheme.displayMedium,
+          style: textTheme.displayMedium!.copyWith(color: colorScheme.primary),
         ),
       ),
       body: categoryItems.when(
@@ -117,7 +115,7 @@ class _CategoryItemScreenState extends ConsumerState<CategoryItemScreen> {
                                             height: constraints.maxHeight / 2,
                                             width: constraints.maxWidth / 2,
                                             image: NetworkImage(
-                                              "${book.imageLinks!.thumbnail}",
+                                              book.getImageUrl,
                                             ),
                                             fit: BoxFit.fill, // use this
                                           ),
