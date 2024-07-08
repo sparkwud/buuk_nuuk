@@ -1,16 +1,21 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class StoreScreen extends StatelessWidget {
+  const StoreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //  backgroundColor: const Color(0xFFF6F6F6),
+      backgroundColor: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+          .withOpacity(1.0),
       appBar: AppBar(
         centerTitle: true,
         leading: const BackButton(),
         title: const Text(
-          "Settings",
+          "Store",
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
@@ -25,7 +30,7 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: const Center(
         child: Text(
-          "Settings Screen",
+          "Store Screen",
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w700,

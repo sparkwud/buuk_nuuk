@@ -1,4 +1,8 @@
+import 'package:buuk_nuuk/utils/app_drawables.dart';
+import 'package:buuk_nuuk/utils/pallete.dart';
+import 'package:buuk_nuuk/utils/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -13,19 +17,15 @@ class _FavouritePageState extends State<FavoriteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favourite'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {},
+        title: Text(
+          "Favourite",
+          style: textTheme.displayMedium!.copyWith(color: colorScheme.primary),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
+        // backgroundColor: Colors.white,
+        elevation: 0,
+
+        actions: const [
+          Icon(Icons.more_vert),
         ],
       ),
       body: SingleChildScrollView(
@@ -38,12 +38,11 @@ class _FavouritePageState extends State<FavoriteScreen> {
                 children: [
                   Container(
                     width: 100,
-                    height: 150,
+                    height: 150.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: const DecorationImage(
-                        image:
-                            NetworkImage('https://via.placeholder.com/100x150'),
+                        image: NetworkImage(AppImages.errorLink),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -124,16 +123,16 @@ class _FavouritePageState extends State<FavoriteScreen> {
                 child: Row(
                   children: [
                     LikedBookCard(
-                      imageUrl: 'https://via.placeholder.com/100x150',
+                      imageUrl: AppImages.errorLink,
                     ),
                     LikedBookCard(
-                      imageUrl: 'https://via.placeholder.com/100x150',
+                      imageUrl: AppImages.errorLink,
                     ),
                     LikedBookCard(
-                      imageUrl: 'https://via.placeholder.com/100x150',
+                      imageUrl: AppImages.errorLink,
                     ),
                     LikedBookCard(
-                      imageUrl: 'https://via.placeholder.com/100x150',
+                      imageUrl: AppImages.errorLink,
                     ),
                   ],
                 ),
