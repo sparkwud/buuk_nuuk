@@ -44,6 +44,18 @@ android {
         versionName = flutterVersionName
     }
 
+    buildscript {
+
+        repositories {
+            google()
+            jcenter()
+        }
+
+        dependencies {
+            // Using gradle plugin version 4.1.1
+            classpath 'com.android.tools.build:gradle:4.1.1'
+        }
+    }
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
