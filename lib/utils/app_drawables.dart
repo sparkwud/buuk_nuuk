@@ -3,6 +3,9 @@ class AppImages {
   static const String imagePath = 'assets/images';
 
   static const String imgProfile = "$imagePath/img_profile.png";
+
+  static const String errorLink =
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTMI5yf9vYw85Q9Qr4kI3HH-qHdza7Gzp5HQ&s";
 }
 
 class AppIcons {
@@ -16,6 +19,12 @@ class AppIcons {
 
   static const icFavorite = '$iconsPath/ic_favorite.svg';
   static const icFavoriteFilled = '$iconsPath/ic_favorite_filled.svg';
+
+  static const icCategories = '$iconsPath/ic_categories.svg';
+  static const icCategoriesFilled = '$iconsPath/ic_categories_filled.svg';
+  
+  static const icShelf = '$iconsPath/ic_shelf.svg';
+  static const icShelfFilled = '$iconsPath/ic_shelf_filled.svg';
 
   static const icStore = '$iconsPath/ic_store.svg';
   static const icStoreFilled = '$iconsPath/ic_store_filled.svg';
