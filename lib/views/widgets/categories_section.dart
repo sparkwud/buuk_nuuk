@@ -22,8 +22,6 @@ class HomeCategoriesSection extends ConsumerStatefulWidget {
 }
 
 class _HomeCategoriesSectionState extends ConsumerState<HomeCategoriesSection> {
-  String errorLink =
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTMI5yf9vYw85Q9Qr4kI3HH-qHdza7Gzp5HQ&s";
   late Parameters params;
 
   @override

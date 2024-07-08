@@ -17,7 +17,7 @@ class ExpandableText extends StatefulWidget {
     this.trimCollapsedText = "Read more",
     this.trimExpandedText = "Read less",
     this.trimStyle,
-    this.trimColor = Colors.blue,
+    this.trimColor = Colors.grey,
   });
 
   @override
