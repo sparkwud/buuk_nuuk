@@ -1,6 +1,11 @@
+import 'dart:ui';
+
+import 'package:buuk_nuuk/utils/app_drawables.dart';
+import 'package:buuk_nuuk/utils/pallete.dart';
+import 'package:buuk_nuuk/utils/widget_extensions.dart';
 import 'package:buuk_nuuk/views/screens/categories_screen.dart';
-import 'package:buuk_nuuk/views/screens/favorite_screen.dart';
 import 'package:buuk_nuuk/views/screens/home_screen.dart';
+import 'package:buuk_nuuk/views/screens/search_screen.dart';
 import 'package:buuk_nuuk/views/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -20,17 +25,29 @@ class _MainContainerState extends State<MainContainer> {
     });
   }
 
+  final List<(String, String)> _navItems = [
+    ("Home", AppIcons.icHome),
+    ("Search", AppIcons.icSearch),
+    ("Categories", AppIcons.icCategories),
+    ("Shelf", AppIcons.icShelf),
+  ];
+
+  // final Color inActiveColor = const Color(0x0666d438);
+
   final List<Widget> _screens = [
     const HomeScreen(),
-    const FavoriteScreen(),
+    const SearchScreen(),
     const CategoriesScreen(),
     const SettingsScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final Color activeColor = colorScheme.secondary;
+    const Color inActiveColor = Color.fromRGBO(109, 77, 56, 0.395);
+    // const Color inActiveColor = Colors.white;
+
     return Scaffold(
-      backgroundColor: Colors.white,
       extendBody: true,
       body: IndexedStack(
         index: _currentIndex,
@@ -38,49 +55,46 @@ class _MainContainerState extends State<MainContainer> {
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(20),
+          top: Radius.circular(25),
         ),
-        child: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          unselectedLabelStyle: const TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w400,
-            color: Color(0xFF838383),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 5.0,
+            sigmaY: 5.0,
           ),
-          selectedLabelStyle: const TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w400,
-            color: Colors.black,
+          child: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: const Color(0x59FAEED6),
+            unselectedLabelStyle: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w400,
+              color: Color(0xFF838383),
+            ),
+            selectedLabelStyle: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w400,
+              color: colorScheme.secondary,
+            ),
+            selectedItemColor: activeColor,
+            unselectedItemColor: inActiveColor,
+            items: _navItems
+                .map(
+                  (item) => BottomNavigationBarItem(
+                    icon: item.$2.svgPicture(
+                      color: inActiveColor,
+                      height: 20,
+                    ),
+                    activeIcon: item.$2.svgPicture(
+                      height: 20,
+                      color: activeColor,
+                    ),
+                    label: item.$1,
+                  ),
+                )
+                .toList(),
+            onTap: _onTap,
           ),
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              // icon: AppIcons.icHome.svgPicture(height: 20),
-              // activeIcon: AppIcons.icHomeFilled.svgPicture(height: 20),
-              label: "Home",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              // icon: AppIcons.icFavorite.svgPicture(height: 20),
-              // activeIcon: AppIcons.icHistoryFilled.svgPicture(height: 20),
-              label: "Favourite",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.category),
-              // icon: AppIcons.icStore.svgPicture(height: 20),
-              // activeIcon: AppIcons.icStoreFilled.svgPicture(height: 20),
-              label: "Categories",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              // icon: AppIcons.icSettings.svgPicture(height: 20),
-              // activeIcon: AppIcons.icSettingsFilled.svgPicture(height: 20),
-              label: "Settings",
-            ),
-          ],
-          onTap: _onTap,
         ),
       ),
     );
