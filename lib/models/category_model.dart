@@ -17,6 +17,12 @@ enum Category {
     imageUrl:
         "https://images.unsplash.com/photo-1585849837997-ac13cb616ff7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG5vdmVsfGVufDB8fDB8fHww",
   ),
+  coding(
+    title: "Coding",
+    query: "Coding",
+    imageUrl:
+        "https://images.unsplash.com/photo-1672309558498-cfcc89afff25?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvZGluZyUyMGJvb2tzfGVufDB8fDB8fHww",
+  ),
   romance(
     title: "Romance",
     query: "romance",
@@ -36,6 +42,12 @@ enum Category {
     query: "history",
     imageUrl:
         "https://images.unsplash.com/photo-1613324766451-2d03b2ea8190?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  ),
+  computers(
+    title: "Computers",
+    query: "computers",
+    imageUrl:
+        "https://images.unsplash.com/photo-1688582139492-734f3d3746d9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bWFjaW50b3NofGVufDB8fDB8fHww",
   ),
   horror(
     title: "Horror",
