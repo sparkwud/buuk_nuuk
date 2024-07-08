@@ -31,18 +31,18 @@ TextTheme get textTheme => TextTheme(
       ),
 
       //  text field default
-      bodyLarge: TextStyle(
-        color: appColors.gray90002,
+      bodyLarge: GoogleFonts.literata(
+        color: colorScheme.secondary,
         fontSize: 17.sp,
         fontWeight: FontWeight.w400,
       ),
-      bodyMedium: TextStyle(
-        color: appColors.black900,
+      bodyMedium: GoogleFonts.literata(
+        color: colorScheme.secondary,
         fontSize: 14.sp,
         fontWeight: FontWeight.w400,
       ),
-      bodySmall: TextStyle(
-        color: appColors.gray50002,
+      bodySmall: GoogleFonts.literata(
+        color: colorScheme.secondary,
         fontSize: 12.sp,
         fontWeight: FontWeight.w400,
       ),

@@ -1,3 +1,4 @@
+import 'package:buuk_nuuk/utils/pallete.dart';
 import 'package:buuk_nuuk/utils/text_theme.dart';
 import 'package:buuk_nuuk/views/screens/main_container.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +25,13 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Buuk Nuuk',
           theme: ThemeData(
-            // scaffoldBackgroundColor: Colors.white,
-            // scaffoldBackgroundColor: const Color(0xFFFAEED6),
-            // appBarTheme: const AppBarTheme(backgroundColor: Color(0xFFFAEED6)),
+            scaffoldBackgroundColor: colorScheme.primary,
+            appBarTheme: AppBarTheme(
+              backgroundColor: colorScheme.secondary,
+              foregroundColor: colorScheme.primary,
+            ),
             textTheme: textTheme,
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            colorScheme: ColorScheme.fromSeed(seedColor: colorScheme.primary),
             useMaterial3: true,
           ),
           home: const MainContainer(),

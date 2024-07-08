@@ -4,9 +4,13 @@ AppColors get appColors => AppColors();
 
 ColorScheme get colorScheme => const ColorScheme.light(
       // Primary colors
-      primary: Color(0XFF0F2B0B),
+      primary: Color(0xFFFAEED6),
+      secondary: Color(0xFF6D4D38),
       primaryContainer: Color(0XFF7D7D7D),
       secondaryContainer: Color(0XFF212121),
+
+      // backgroundColor: const Color(0xFFfffbf0),
+      // color: Color(0xFFffcca7),
 
       // Error colors
       errorContainer: Color(0XFFE50000),
@@ -20,14 +24,12 @@ ColorScheme get colorScheme => const ColorScheme.light(
 
 /// Class containing custom colors for a primary theme.
 class AppColors {
-
   Color get gray90002 => const Color(0XFF191D31);
   Color get black900 => const Color(0XFF071018);
   Color get gray50002 => const Color(0XFF9597A6);
   Color get gray90001 => const Color(0XFF091824);
   Color get blueGray90001 => const Color(0XFF373737);
   Color get gray50001 => const Color(0XFF989898);
-
 
   // Green
   Color get green50 => const Color(0XFFDFF7E3);
