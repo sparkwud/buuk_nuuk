@@ -17,7 +17,7 @@ class ExpandableText extends StatefulWidget {
     this.trimCollapsedText = "Read more",
     this.trimExpandedText = "Read less",
     this.trimStyle,
-    this.trimColor = Colors.grey,
+    this.trimColor = Colors.black54,
   });
 
   @override
@@ -50,13 +50,22 @@ class _ExpandableTextState extends State<ExpandableText> {
             _readMore = !_readMore;
           });
         },
-        child: Text(
-          _readMore ? widget.trimCollapsedText : widget.trimExpandedText,
-          style: widget.trimStyle ??
-              TextStyle(
-                color: widget.trimColor,
-                fontSize: 13,
-              ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              _readMore ? widget.trimCollapsedText : widget.trimExpandedText,
+              style: widget.trimStyle ??
+                  TextStyle(
+                    color: widget.trimColor,
+                    fontSize: 13,
+                  ),
+            ),
+            Icon(
+              _readMore ? Icons.arrow_drop_down : Icons.arrow_drop_up,
+              color: widget.trimColor,
+            ),
+          ],
         ),
       ),
     );
@@ -76,6 +85,8 @@ class _ExpandableTextState extends State<ExpandableText> {
               : Text(
                   widget.text,
                   style: widget.style,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 30,
                 ),
         ),
         if (tp.didExceedMaxLines) link,
