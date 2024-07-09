@@ -31,6 +31,7 @@ class Book {
   final List<String>? categories;
   final ImageLinks? imageLinks;
   final String? printType;
+  final String? previewLink;
 
   Book({
     required this.title,
@@ -43,6 +44,7 @@ class Book {
     this.categories,
     this.imageLinks,
     this.printType,
+    this.previewLink,
   });
 
   factory Book.fromJson(Map<String, dynamic> json) {
@@ -60,6 +62,7 @@ class Book {
       imageLinks: json['imageLinks'] != null
           ? ImageLinks.fromJson(json['imageLinks'])
           : null,
+      previewLink: json["previewLink"],
     );
   }
   String get getAuthors => authors?.join(", ") ?? "No author(s) found";
