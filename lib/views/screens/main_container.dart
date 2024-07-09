@@ -6,7 +6,7 @@ import 'package:buuk_nuuk/utils/widget_extensions.dart';
 import 'package:buuk_nuuk/views/screens/categories_screen.dart';
 import 'package:buuk_nuuk/views/screens/home_screen.dart';
 import 'package:buuk_nuuk/views/screens/search_screen.dart';
-import 'package:buuk_nuuk/views/screens/settings_screen.dart';
+import 'package:buuk_nuuk/views/screens/shelf_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainContainer extends StatefulWidget {
@@ -38,7 +38,7 @@ class _MainContainerState extends State<MainContainer> {
     const HomeScreen(),
     const SearchScreen(),
     const CategoriesScreen(),
-    const SettingsScreen(),
+    const ShelfScreen(),
   ];
 
   @override
@@ -67,12 +67,12 @@ class _MainContainerState extends State<MainContainer> {
             type: BottomNavigationBarType.fixed,
             backgroundColor: const Color(0x59FAEED6),
             unselectedLabelStyle: const TextStyle(
-              fontSize: 10,
+              fontSize: 10.5,
               fontWeight: FontWeight.w400,
               color: Color(0xFF838383),
             ),
             selectedLabelStyle: TextStyle(
-              fontSize: 10,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
               color: colorScheme.secondary,
             ),
