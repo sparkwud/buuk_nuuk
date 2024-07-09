@@ -2,7 +2,7 @@ import 'package:buuk_nuuk/views/screens/categories_screen.dart';
 import 'package:buuk_nuuk/views/screens/favorite_screen.dart';
 import 'package:buuk_nuuk/views/screens/home_screen.dart';
 import 'package:buuk_nuuk/views/screens/nav_bar.dart';
-import 'package:buuk_nuuk/views/screens/settings_screen.dart';
+import 'package:buuk_nuuk/views/screens/shelf_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -37,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
         navKey: notificationNavKey,
       ),
       NavModel(
-        page: const SettingsScreen(),
+        page: const ShelfScreen(),
         navKey: profileNavKey,
       ),
     ];
