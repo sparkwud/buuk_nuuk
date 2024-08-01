@@ -1,13 +1,17 @@
 import 'package:buuk_nuuk/models/category_model.dart';
 import 'package:buuk_nuuk/providers/book_service_providers.dart';
-import 'package:buuk_nuuk/utils/app_drawables.dart';
-import 'package:buuk_nuuk/utils/widget_extensions.dart';
-import 'package:buuk_nuuk/views/screens/search_screen.dart';
+import 'package:buuk_nuuk/utils/context_extension.dart';
+import 'package:buuk_nuuk/utils/pallete.dart';
+import 'package:buuk_nuuk/utils/text_theme.dart';
+import 'package:buuk_nuuk/views/screens/book_details_screen.dart';
+import 'package:buuk_nuuk/views/widgets/book_cover_3d.dart';
+import 'package:buuk_nuuk/views/widgets/categories_section.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
-import '../widgets/book_card.dart';
 import '../widgets/news_card.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -24,131 +28,194 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    params = Parameters(category: Category.fiction);
+    params = Parameters(category: Category.coding);
   }
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     final booksAsyncValue = ref.watch(
       booksFromCategoryProvider(params),
     );
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'BuukNuuk',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-        ),
-        actions: [
-          IconButton(
-            icon: AppIcons.icSearch.svgPicture(),
-            onPressed: () => showSearch(
-              context: context,
-              delegate: SearchScreen(),
-            ),
-          ),
-        ],
-      ),
+      backgroundColor: colorScheme.primary,
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: const Text(
+      //     'BuukNuuk',
+      //     style: TextStyle(
+      //       fontSize: 18,
+      //       fontWeight: FontWeight.bold,
+      //     ),
+      //   ),
+      //   backgroundColor: Colors.white,
+      //   foregroundColor: Colors.black,
+      //   elevation: 0,
+      //   leading: IconButton(
+      //     icon: const Icon(Icons.menu),
+      //     onPressed: () {},
+      //   ),
+      //   actions: [
+      //     IconButton(
+      //       icon: AppIcons.icSearch.svgPicture(),
+      //       onPressed: () => showSearch(
+      //         context: context,
+      //         delegate: SearchScreen(),
+      //       ),
+      //     ),
+      //   ],
+      // ),
       body: booksAsyncValue.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) =>
-            Center(child: Text('Failed to load books: $error')),
-        data: (books) => SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16.0),
-                  width: double.infinity,
-                  height: 180,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: const DecorationImage(
-                      image: NetworkImage(
-                        'https://images.unsplash.com/photo-1502485019198-a625bd53ceb7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fHw%3D',
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        error: (error, stack) => const Center(
+          child: Text(
+            'Failed to load books. Please check your internet connection',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        data: (books) => AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light.copyWith(
+            statusBarColor: colorScheme.secondary,
+          ),
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Stack(
                     children: [
-                      Text(
-                        'We found the best',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                      Text(
-                        'Books For You',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                      Container(
+                        height: context.height / 2.5,
+                        decoration: BoxDecoration(
+                          color: colorScheme.secondary,
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(45),
+                            bottomRight: Radius.circular(45),
+                          ),
                         ),
                       ),
-                      Text(
-                        'Over 10,000 books on our service',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Buuk Nuuk",
+                              style: textTheme.displayLarge!.copyWith(
+                                color: colorScheme.primary,
+                              ),
+                            ),
+                            const Gap(20),
+                            // InkWell(
+                            //   onTap: () {
+                            //     showSearch(
+                            //       context: context,
+                            //       delegate: BookSearchDelegate(
+
+                            //       ),
+                            //     );
+                            //   },
+                            //   child: const StaticSearchContainer(),
+                            // ),
+                            const Gap(20),
+                            Text(
+                              "Top Picks",
+                              style: textTheme.displayMedium!.copyWith(
+                                color: colorScheme.primary,
+                              ),
+                            ),
+                            const Gap(16),
+                            CarouselSlider.builder(
+                              itemCount: books.length,
+                              itemBuilder: (context, index, realIndex) {
+                                final book = books[index];
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => BookDetailsScreen(
+                                          bookDetails: book,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Hero(
+                                    tag: book,
+                                    child: BookCover3D(
+                                      imageUrl: book.getImageUrl,
+                                      title: book.title,
+                                      author: book.getAuthors,
+                                    ),
+                                  ),
+                                );
+                              },
+                              options: CarouselOptions(
+                                aspectRatio: 1.5,
+                                enlargeCenterPage: true,
+                                viewportFraction: 0.45,
+                                enlargeFactor: 0.4,
+                                enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                              ),
+                            ),
+                            const Gap(20),
+                            SizedBox(
+                              height: context.width * 0.72,
+                              //height: constraints.maxHeight * 0.38,
+                              child: const HomeCategoriesSection(
+                                category: Category.fiction,
+                              ),
+                            ),
+                            const Gap(16),
+                            SizedBox(
+                              height: context.width * 0.72,
+                              child: const HomeCategoriesSection(
+                                category: Category.computers,
+                              ),
+                            ),
+                            const Gap(16),
+                            SizedBox(
+                              height: context.width * 0.72,
+                              child: const HomeCategoriesSection(
+                                category: Category.classic,
+                              ),
+                            ),
+                            const Gap(16),
+                            SizedBox(
+                              height: context.width * 0.72,
+                              child: const HomeCategoriesSection(
+                                category: Category.history,
+                              ),
+                            ),
+                            const Gap(16),
+                            const Text(
+                              'News',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const Gap(10),
+                            const NewsCard(
+                              title: 'The Subtle Art of Not...',
+                              author: 'Karen Joy Fowler',
+                              rating: 3.7,
+                            ),
+                            const NewsCard(
+                              title: 'The Subtle Art of Not...',
+                              author: 'Karen Joy Fowler',
+                              rating: 3.7,
+                            ),
+                            const NewsCard(
+                              title: 'The Subtle Art of Not...',
+                              author: 'Karen Joy Fowler',
+                              rating: 3.7,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-                const Gap(20),
-                const Text(
-                  'Books for you',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const Gap(10),
-                SizedBox(
-                  height: height * 1 / 4,
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    separatorBuilder: (context, index) => const Gap(10),
-                    itemCount: books.length,
-                    itemBuilder: (context, index) {
-                      final book = books[index];
-                      return BookCard(
-                        title: book.title,
-                        imageUrl: book.imageLinks?.thumbnail,
-                      );
-                    },
-                  ),
-                ),
-                const Gap(20),
-                const Text(
-                  'News',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const Gap(10),
-                const NewsCard(
-                  title: 'The Subtle Art of Not...',
-                  author: 'Karen Joy Fowler',
-                  rating: 3.7,
-                ),
-                const NewsCard(
-                  title: 'The Subtle Art of Not...',
-                  author: 'Karen Joy Fowler',
-                  rating: 3.7,
-                ),
-                const NewsCard(
-                  title: 'The Subtle Art of Not...',
-                  author: 'Karen Joy Fowler',
-                  rating: 3.7,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
