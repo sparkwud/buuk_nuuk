@@ -1,12 +1,12 @@
-import 'dart:math' as math;
-
 import 'package:buuk_nuuk/models/book_model.dart';
+import 'package:buuk_nuuk/utils/context_extension.dart';
 import 'package:buuk_nuuk/utils/pallete.dart';
 import 'package:buuk_nuuk/utils/text_theme.dart';
 import 'package:buuk_nuuk/views/widgets/book_details_widget.dart';
 import 'package:buuk_nuuk/views/widgets/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BookDetailsScreen extends StatefulWidget {
   const BookDetailsScreen({
@@ -27,68 +27,63 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
     double width = MediaQuery.of(context).size.width / 375;
 
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: height * 350,
-              child: Stack(
-                children: [
-                  Container(
-                    width: double.maxFinite,
-                    height: height * 200,
-                    decoration: BoxDecoration(
-                      color:
-                          Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-                              .withOpacity(1.0),
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(35),
-                        bottomRight: Radius.circular(35),
-                      ),
+            Stack(
+              children: [
+                Container(
+                  width: double.maxFinite,
+                  height: context.height / 3.5,
+                  decoration: BoxDecoration(
+                    color: colorScheme.secondary,
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(35),
+                      bottomRight: Radius.circular(35),
                     ),
                   ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
-                      height: height * 250,
-                      alignment: Alignment.center,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Hero(
-                          tag: widget.bookDetails,
-                          child: Image(
-                            image: NetworkImage(
-                              "${widget.bookDetails.imageLinks?.thumbnail}",
-                            ),
-                            fit: BoxFit.cover,
+                ),
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            Icons.arrow_back_ios_new,
+                            color: colorScheme.primary,
+                            size: 18,
                           ),
                         ),
-                      ),
+                        const Gap(20),
+                        Container(
+                          // height: height * 300,
+                          // height: context.width * 0.4,
+
+                          alignment: Alignment.center,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Hero(
+                              tag: widget.bookDetails,
+                              child: Image(
+                                image: NetworkImage(
+                                  widget.bookDetails.getImageUrl,
+                                ),
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Positioned(
-                    top: 70,
-                    left: 16,
-                    child: OutlinedButton.icon(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      style: OutlinedButton.styleFrom(
-                        side: const BorderSide(width: 1),
-                      ),
-                      icon: Icon(
-                        Icons.arrow_back_ios_new,
-                        color: appColors.black,
-                      ),
-                      label: const Text(
-                        "",
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
             Container(
               padding: const EdgeInsets.all(16),
@@ -98,10 +93,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                   Text(
                     widget.bookDetails.title,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayLarge
-                        ?.copyWith(fontSize: 24),
+                    style: textTheme.displayLarge?.copyWith(fontSize: 24),
                   ),
                   const SizedBox(height: 10),
                   Text(
@@ -109,9 +101,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                     textAlign: TextAlign.center,
                     style: textTheme.headlineMedium,
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const Gap(10),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 35,
@@ -158,16 +148,17 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                     children: [
                       OutlinedButton(
                         onPressed: () async {
-                          // Uri url = Uri.parse(
-                          //     "${widget.bookDetails.previewLink}");
-
-                          // if (await canLaunchUrl(url)) {
-                          //   await launchUrl(url,
-                          //       mode: LaunchMode
-                          //           .externalApplication);
-                          // } else {
-                          //   throw 'could not launch $url';
-                          // }
+                          Uri url =
+                              Uri.parse("${widget.bookDetails.previewLink}");
+                          debugPrint(url.toString());
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(
+                              url,
+                              mode: LaunchMode.platformDefault,
+                            );
+                          } else {
+                            throw 'could not launch $url';
+                          }
                         },
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(width: 1),
@@ -204,7 +195,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                   ),
                   const Gap(20),
                   Text(
-                    "Description",
+                    "Synopsis",
                     style: textTheme.displayMedium,
                   ),
                   const SizedBox(
@@ -217,22 +208,22 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () async {
-                      // Uri url = Uri.parse(
-                      //     "${widget.bookDetails.infoLink}");
-
-                      // if (await canLaunchUrl(url)) {
-                      //   await launchUrl(url,
-                      //       mode:
-                      //           LaunchMode.externalApplication);
-                      // } else {
-                      //   throw 'could not launch $url';
-                      // }
+                      Uri url = Uri.parse("${widget.bookDetails.previewLink}");
+                      debugPrint(url.toString());
+                      if (await canLaunchUrl(url)) {
+                        await launchUrl(
+                          url,
+                          mode: LaunchMode.platformDefault,
+                        );
+                      } else {
+                        throw 'could not launch $url';
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: appColors.black,
                     ),
                     child: Text(
-                      "Buy",
+                      "Preview Book",
                       style: textTheme.displayMedium?.copyWith(
                         fontSize: 18,
                         color: Colors.white,
