@@ -37,7 +37,7 @@ class BooksService {
 
   Future<List<Book>> getBooksFromCategory({
     required Category category,
-    required int maxResult ,
+    required int maxResult,
   }) async {
     final url = Endpoints.searchCategory(
       query: category.query,
@@ -50,19 +50,16 @@ class BooksService {
       // debugPrint('Response body: ${response.body}');
 
       if (response.statusCode == 200) {
-        debugPrint('if this shows then the status code is 200');
-
         final items = responseModelFromJson(response.body).items;
         final books = items.map((item) => item.bookInfo).toList();
-        debugPrint(books[0].toString());
+        // debugPrint(books[0].toString());
         return books;
       } else {
-        throw Exception("Failed to load books");
+        debugPrint(response.reasonPhrase);
+        throw response.reasonPhrase!;
       }
     } catch (e) {
-      debugPrint('Error in getBooksFromCategory: $e');
-
-      throw Exception("Failed to load books");
+      rethrow;
     }
   }
 }
