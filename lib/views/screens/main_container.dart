@@ -44,7 +44,7 @@ class _MainContainerState extends State<MainContainer> {
   @override
   Widget build(BuildContext context) {
     final Color activeColor = colorScheme.secondary;
-    const Color inActiveColor = Color.fromRGBO(109, 77, 56, 0.395);
+    const Color inActiveColor = Color(0xFF8B5E3C);
     // const Color inActiveColor = Colors.white;
 
     return Scaffold(
@@ -65,16 +65,16 @@ class _MainContainerState extends State<MainContainer> {
           child: BottomNavigationBar(
             currentIndex: _currentIndex,
             type: BottomNavigationBarType.fixed,
-            backgroundColor: const Color(0x59FAEED6),
+            backgroundColor: const Color(0xCCFAEED6),
             unselectedLabelStyle: const TextStyle(
               fontSize: 10.5,
               fontWeight: FontWeight.w400,
-              color: Color(0xFF838383),
+              color: inActiveColor,
             ),
             selectedLabelStyle: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w400,
-              color: colorScheme.secondary,
+              color: activeColor,
             ),
             selectedItemColor: activeColor,
             unselectedItemColor: inActiveColor,
