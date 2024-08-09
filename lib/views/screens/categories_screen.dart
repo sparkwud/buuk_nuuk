@@ -16,7 +16,9 @@ class CategoriesScreen extends StatelessWidget {
         elevation: 1,
         title: Text(
           "Categories",
-          style: textTheme.displayMedium!.copyWith(color: colorScheme.primary),
+          style: textTheme.displayMedium!.copyWith(
+            color: colorScheme.primary,
+          ),
         ),
       ),
       body: Padding(
