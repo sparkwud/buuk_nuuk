@@ -8,12 +8,13 @@ class BookCover3D extends StatefulWidget {
   final String? imageUrl;
   final String? title;
   final String? author;
-
+  final Color? titleColor;
   const BookCover3D({
     super.key,
     this.imageUrl,
     this.title,
     this.author,
+    this.titleColor,
   });
 
   @override
@@ -65,7 +66,7 @@ class _BookCover3DState extends State<BookCover3D> {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: colorScheme.secondary,
+                    color: widget.titleColor ?? colorScheme.secondary,
                     fontSize: context.width * 0.035,
                     fontWeight: FontWeight.w700,
                   ),
