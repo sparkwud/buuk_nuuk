@@ -93,7 +93,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -103,7 +103,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 color: colorScheme.primary,
                               ),
                             ),
-                            const Gap(20),
+                            // const Gap(20),
                             // InkWell(
                             //   onTap: () {
                             //     showSearch(
@@ -141,6 +141,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   child: Hero(
                                     tag: book,
                                     child: BookCover3D(
+                                      titleColor: Colors.white,
                                       imageUrl: book.getImageUrl,
                                       title: book.title,
                                       author: book.getAuthors,
