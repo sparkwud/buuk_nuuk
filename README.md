@@ -47,3 +47,36 @@ The app leverages several powerful Flutter packages to deliver a seamless and in
 - Clone the repository
 - Install dependencies:  `flutter pub get`
 - Run the app:  `flutter run`
+
+## Screenshots
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/39046a3f-f972-4dd1-a8c0-01019913121e" alt="Screenshot 1" />
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/b7100577-285b-4230-a84d-a6b55c050119" alt="Screenshot 2" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/b4254b97-bd1f-42b0-9623-403f4b703150" alt="Screenshot 3" />
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/59ba29c3-2e39-464b-a66b-b86977aac455" alt="Screenshot 4" />
+    </td>
+
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/3098f073-43b9-4a09-b820-0b5ae02dde4a" alt="Screenshot 5" />
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/2466a17b-f8e6-4ba2-b515-28ae315cf160" alt="Screenshot 6" />
+    </td>
+  </tr>
+</table>
+
+
+
